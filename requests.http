@@ -4,8 +4,8 @@ POST {{base}}/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin"
+  "email": "adminc@go.com",
+  "password": "berekbere"
 }
 
 ###
@@ -13,18 +13,10 @@ GET {{base}}/api/quote
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTg4NzEwMDk5LCJqdGkiOiJlNmU4NTA2MjhkM2E0ZDJjOGI5YmQ5ZTA3OGJjZDlmZSIsInVzZXJfaWQiOjF9.1fo1b7f2u3pvyvsYDOx6zpBZRxdK5i__JlguOn4Qm4U
 
 ###
-POST {{base}}/auth/register
-{
-  "email": "admin",
-  "password": "admin"
-}
-
-
-###
 POST {{base}}/users/register/
 Content-Type: application/json
 
 {
-  "email": "adaosa@go.com",
-  "password": "ehhe"
+  "email": "adminc@go.com",
+  "password": "berekberek"
 }

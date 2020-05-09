@@ -15,15 +15,37 @@ class EmailTokenObtainSerializer(TokenObtainPairSerializer):
 
 class CustomTokenObtainPairSerializer(EmailTokenObtainSerializer):
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
+    # def to_internal_value(self, data):
+    #     try:
+    #         try:
+    #             email = data['email']
+    #             return User.objects.get(email=email)
+    #         except KeyError:
+    #             raise serializers.ValidationError(_('email is required field'))
+    #         except ValueError:
+    #             raise serializers.ValidationError(_('wrong email format'))
+    #     except User.DoesNotExist:
+    #         raise serializers.ValidationError(_('User does not exist'))
 
-        refresh = self.get_token(self.user)
+    def validate(self, data):
+        print(data)
+        try:
+            try:
+                email = data['email']
+                usr = User.objects.get(email=email)
+                data = super().validate(data)
+                refresh = self.get_token(self.user)
 
-        data["refresh"] = str(refresh)
-        data["access"] = str(refresh.access_token)
+                data["refresh"] = str(refresh)
+                data["access"] = str(refresh.access_token)
 
-        return data
+                return data
+            except KeyError:
+                raise serializers.ValidationError(_('email is required field'))
+            except ValueError:
+                raise serializers.ValidationError(_('wrong email format'))
+        except User.DoesNotExist:
+            raise serializers.ValidationError(_('User does not exist'))
 
 
 class UserSerializer(serializers.ModelSerializer):

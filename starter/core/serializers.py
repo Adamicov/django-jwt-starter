@@ -15,18 +15,6 @@ class EmailTokenObtainSerializer(TokenObtainPairSerializer):
 
 class CustomTokenObtainPairSerializer(EmailTokenObtainSerializer):
 
-    # def to_internal_value(self, data):
-    #     try:
-    #         try:
-    #             email = data['email']
-    #             return User.objects.get(email=email)
-    #         except KeyError:
-    #             raise serializers.ValidationError(_('email is required field'))
-    #         except ValueError:
-    #             raise serializers.ValidationError(_('wrong email format'))
-    #     except User.DoesNotExist:
-    #         raise serializers.ValidationError(_('User does not exist'))
-
     def validate(self, data):
         print(data)
         try:
@@ -36,7 +24,7 @@ class CustomTokenObtainPairSerializer(EmailTokenObtainSerializer):
                 data = super().validate(data)
                 refresh = self.get_token(self.user)
 
-                data["refresh"] = str(refresh)
+                data["refresh"] = str(refresh)  
                 data["access"] = str(refresh.access_token)
 
                 return data
